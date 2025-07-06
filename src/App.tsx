@@ -46,13 +46,13 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden text-gray-800 font-sans bg-[#f2f5f9]">
-      {/* Lighter gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#ffffff] to-[#f0f4f8]" />
+    <div className="min-h-screen relative overflow-hidden text-gray-800 font-sans bg-[#f7f9fb]">
+      {/* Ultra-light background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#ffffff] to-[#f4f7fa]" />
 
-      {/* Subtle glowing blobs */}
-      <div className="absolute top-10 left-10 w-56 h-56 bg-purple-100/20 rounded-full blur-[100px] animate-pulse" />
-      <div className="absolute bottom-20 right-10 w-48 h-48 bg-pink-100/20 rounded-full blur-[100px] animate-pulse delay-1000" />
+      {/* Soft blurry blobs */}
+      <div className="absolute top-10 left-10 w-56 h-56 bg-purple-100/15 rounded-full blur-[100px] animate-pulse" />
+      <div className="absolute bottom-20 right-10 w-48 h-48 bg-pink-100/15 rounded-full blur-[100px] animate-pulse delay-1000" />
 
       {/* Audio */}
       <audio ref={audioRef} loop preload="auto">
@@ -62,13 +62,13 @@ function App() {
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
         <div className="w-full max-w-xl mx-auto">
           <div
-            className="rounded-[2rem] p-10 text-center shadow-xl"
+            className="rounded-[2rem] p-10 text-center"
             style={{
-              background: "rgba(255, 255, 255, 0.3)",
-              backdropFilter: "blur(25px)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-              boxShadow:
-                "0 10px 40px rgba(255, 255, 255, 0.3), 0 0 2px rgba(0, 0, 0, 0.1)",
+              background: "rgba(255, 255, 255, 0.25)",
+              backdropFilter: "blur(18px)",
+              WebkitBackdropFilter: "blur(18px)",
+              border: "1px solid rgba(255, 255, 255, 0.15)",
+              boxShadow: "0 8px 24px rgba(0, 0, 0, 0.05)",
             }}
           >
             {/* Image Carousel */}
@@ -78,10 +78,6 @@ function App() {
                   src={profileImages[currentImageIndex]}
                   alt={`Yatharth Shah ${currentImageIndex + 1}`}
                   className="w-full h-full object-cover rounded-full shadow-2xl border-4 border-white"
-                  style={{
-                    boxShadow:
-                      "0 12px 25px rgba(0, 0, 0, 0.15), 0 0 15px rgba(255, 255, 255, 0.4)",
-                  }}
                 />
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
                   {profileImages.map((_, idx) => (
@@ -106,7 +102,7 @@ function App() {
             <div className="mb-6">
               <button
                 onClick={toggleMusic}
-                className="p-4 rounded-full border shadow-md bg-white/70 hover:scale-110 transition"
+                className="p-4 rounded-full border shadow-sm bg-white/60 hover:scale-110 transition"
               >
                 {isPlaying ? (
                   <Pause className="w-6 h-6 text-pink-600" />
