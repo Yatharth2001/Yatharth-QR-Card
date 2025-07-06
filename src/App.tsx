@@ -62,13 +62,13 @@ function App() {
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
         <div className="w-full max-w-xl mx-auto">
           <div
-            className="rounded-[2rem] p-10 text-center"
+            className="relative rounded-[2rem] p-10 text-center border"
             style={{
-              background: "rgba(255, 255, 255, 0.25)",
-              backdropFilter: "blur(18px)",
-              WebkitBackdropFilter: "blur(18px)",
-              border: "1px solid rgba(255, 255, 255, 0.15)",
-              boxShadow: "0 8px 24px rgba(0, 0, 0, 0.05)",
+              background: "rgba(255,255,255,0.55)", // lighter glass effect
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              border: "1.5px solid rgba(255,255,255,0.25)",
+              boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.10)",
             }}
           >
             {/* Image Carousel */}
