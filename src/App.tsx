@@ -16,23 +16,17 @@ import img4 from "./Img/4.jpg";
 function App() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const audioRef = useRef(null);
 
-  // Array of profile images - using local images from Img folder
   const profileImages = [img1, img2, img3, img4];
 
-  // Auto-slide images every 2 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex(
-        (prevIndex) => (prevIndex + 1) % profileImages.length
-      );
-    }, 2000);
-
+      setCurrentImageIndex((prev) => (prev + 1) % profileImages.length);
+    }, 2500);
     return () => clearInterval(interval);
-  }, [profileImages.length]);
+  }, []);
 
-  // Play/pause music on button click
   const toggleMusic = () => {
     if (audioRef.current) {
       if (isPlaying) {
@@ -42,10 +36,7 @@ function App() {
         audioRef.current
           .play()
           .then(() => setIsPlaying(true))
-          .catch((error) => {
-            // Autoplay might be blocked by browser
-            console.log("Play prevented:", error);
-          });
+          .catch((err) => console.log("Playback issue:", err));
       }
     }
   };
@@ -55,69 +46,55 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Darker background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#2d1856] via-[#3b1d3d] to-[#1a2b3a]" />
+    <div className="min-h-screen relative overflow-hidden text-gray-800 font-sans bg-[#f2f5f9]">
+      {/* Lighter gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#ffffff] to-[#f0f4f8]" />
 
-      {/* Dynamic animated background elements */}
-      <div className="absolute top-20 left-10 w-48 h-48 bg-gradient-to-r from-purple-300/30 to-pink-300/30 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-cyan-300/25 to-blue-300/25 rounded-full blur-2xl animate-pulse delay-1000" />
-      <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-gradient-to-r from-violet-300/20 to-purple-300/20 rounded-full blur-xl animate-pulse delay-500" />
-      <div className="absolute top-1/3 right-1/4 w-28 h-28 bg-gradient-to-r from-teal-300/20 to-emerald-300/20 rounded-full blur-lg animate-pulse delay-700" />
+      {/* Subtle glowing blobs */}
+      <div className="absolute top-10 left-10 w-56 h-56 bg-purple-100/20 rounded-full blur-[100px] animate-pulse" />
+      <div className="absolute bottom-20 right-10 w-48 h-48 bg-pink-100/20 rounded-full blur-[100px] animate-pulse delay-1000" />
 
-      {/* Audio element */}
+      {/* Audio */}
       <audio ref={audioRef} loop preload="auto">
         <source src="/Papa Kehte Hain.mp3" type="audio/mpeg" />
-        Your browser does not support the audio element.
       </audio>
 
-      {/* Main content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto">
-          {/* Vibrant glassmorphism card container */}
+        <div className="w-full max-w-xl mx-auto">
           <div
-            className="relative rounded-3xl p-8 text-center border"
+            className="rounded-[2rem] p-10 text-center shadow-xl"
             style={{
-              background:
-                "linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 200, 250, 0.2))",
-              backdropFilter: "blur(14px)",
-              border: "1px solid rgba(255, 255, 255, 0.35)",
+              background: "rgba(255, 255, 255, 0.3)",
+              backdropFilter: "blur(25px)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
               boxShadow:
-                "0 8px 30px rgba(255, 200, 250, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2)",
+                "0 10px 40px rgba(255, 255, 255, 0.3), 0 0 2px rgba(0, 0, 0, 0.1)",
             }}
           >
             {/* Image Carousel */}
-            <div className="mb-8 relative">
-              <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto flex items-center justify-center">
+            <div className="mb-10 relative">
+              <div className="relative w-56 h-56 sm:w-64 sm:h-64 mx-auto flex items-center justify-center">
                 <img
                   src={profileImages[currentImageIndex]}
                   alt={`Yatharth Shah ${currentImageIndex + 1}`}
-                  loading="eager"
-                  draggable={false}
-                  className="w-full h-full rounded-full border-8 shadow-2xl object-cover bg-gray-200 transition-opacity duration-700 opacity-100"
+                  className="w-full h-full object-cover rounded-full shadow-2xl border-4 border-white"
                   style={{
-                    borderColor: "rgba(255, 255, 255, 0.7)",
                     boxShadow:
-                      "0 12px 40px rgba(255, 200, 250, 0.35), 0 0 0 4px rgba(255, 255, 255, 0.25)",
+                      "0 12px 25px rgba(0, 0, 0, 0.15), 0 0 15px rgba(255, 255, 255, 0.4)",
                   }}
                 />
-                {/* Colorful carousel indicators */}
-                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
-                  {profileImages.map((_, index) => (
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                  {profileImages.map((_, idx) => (
                     <div
-                      key={index}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        index === currentImageIndex ? "scale-150 shadow-lg" : ""
-                      }`}
+                      key={idx}
+                      className={`w-3 h-3 rounded-full ${
+                        currentImageIndex === idx ? "scale-125" : "opacity-60"
+                      } transition-all duration-300`}
                       style={{
                         background:
-                          index === currentImageIndex
-                            ? "linear-gradient(45deg, #8b5cf6, #ec4899)"
-                            : "rgba(255, 255, 255, 0.4)",
-                        boxShadow:
-                          index === currentImageIndex
-                            ? "0 2px 8px rgba(236, 72, 153, 0.4)"
-                            : "none",
+                          currentImageIndex === idx
+                            ? "#ec4899"
+                            : "rgba(0,0,0,0.2)",
                       }}
                     />
                   ))}
@@ -125,168 +102,54 @@ function App() {
               </div>
             </div>
 
-            {/* Interactive Audio Player */}
-            <div className="mb-8 flex justify-center">
+            {/* Audio Button */}
+            <div className="mb-6">
               <button
                 onClick={toggleMusic}
-                className="group relative p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border"
-                style={{
-                  background: isPlaying
-                    ? "linear-gradient(135deg, rgba(147, 51, 234, 0.3), rgba(236, 72, 153, 0.3))"
-                    : "linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 200, 250, 0.15))",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255, 255, 255, 0.4)",
-                  boxShadow: isPlaying
-                    ? "0 4px 20px rgba(236, 72, 153, 0.3)"
-                    : "0 4px 15px rgba(255, 200, 250, 0.2)",
-                }}
+                className="p-4 rounded-full border shadow-md bg-white/70 hover:scale-110 transition"
               >
                 {isPlaying ? (
-                  <div className="relative">
-                    <Pause className="w-6 h-6 text-purple-700" />
-                    {/* Animated sound waves */}
-                    <div className="absolute -top-2 -right-2 flex space-x-1">
-                      <div
-                        className="w-1 h-4 bg-gradient-to-t from-purple-500 to-pink-500 rounded-full animate-pulse"
-                        style={{ animationDelay: "0ms" }}
-                      />
-                      <div
-                        className="w-1 h-6 bg-gradient-to-t from-pink-500 to-purple-500 rounded-full animate-pulse"
-                        style={{ animationDelay: "150ms" }}
-                      />
-                      <div
-                        className="w-1 h-3 bg-gradient-to-t from-purple-500 to-pink-500 rounded-full animate-pulse"
-                        style={{ animationDelay: "300ms" }}
-                      />
-                    </div>
-                  </div>
+                  <Pause className="w-6 h-6 text-pink-600" />
                 ) : (
-                  <Play className="w-6 h-6 text-purple-700 ml-1" />
-                )}
-
-                {/* Vinyl disc background effect when playing */}
-                {isPlaying && (
-                  <div
-                    className="absolute inset-0 rounded-full border-2 animate-spin"
-                    style={{
-                      animationDuration: "3s",
-                      borderColor: "rgba(236, 72, 153, 0.4)",
-                    }}
-                  >
-                    <div
-                      className="absolute top-1/2 left-1/2 w-2 h-2 rounded-full transform -translate-x-1/2 -translate-y-1/2"
-                      style={{
-                        background: "linear-gradient(45deg, #8b5cf6, #ec4899)",
-                      }}
-                    />
-                  </div>
+                  <Play className="w-6 h-6 text-pink-600" />
                 )}
               </button>
             </div>
 
-            {/* Name & Funny Tagline */}
-            <div className="mb-8">
-              <h1
-                className="text-3xl font-bold text-gray-800 mb-3"
-                style={{ textShadow: "0 1px 2px rgba(255, 255, 255, 0.5)" }}
-              >
-                Yatharth Shah
-              </h1>
-              <p className="text-lg text-gray-700 leading-relaxed font-medium mb-2">
-                Building bugs professionally (and fixing a few too) 🐞
-              </p>
-              <p className="text-base text-gray-600">
-                Meet the bug whisperer who speaks fluent JavaScript 👨‍💻✨
-              </p>
-            </div>
+            {/* Name + Tagline */}
+            <h1 className="text-4xl font-bold text-gray-800 mb-2">
+              Yatharth Shah
+            </h1>
+            <p className="text-lg text-gray-700 font-medium mb-1">
+              Building bugs professionally (and fixing a few too) 🐞
+            </p>
+            <p className="text-sm text-gray-600 mb-6">
+              Meet the bug whisperer who speaks fluent JavaScript 👨‍💻✨
+            </p>
 
             {/* Social Links */}
-            <div className="flex justify-center gap-4 mb-8">
-              {/* <a
-                href="https://www.linkedin.com/in/yatharth-shah15/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group p-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(59, 130, 246, 0.1))",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255, 255, 255, 0.3)",
-                }}
-              >
-                <Linkedin className="w-6 h-6 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
-              </a> */}
-
-              <a
-                href="https://github.com/Yatharth2001"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group p-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(75, 85, 99, 0.1))",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255, 255, 255, 0.3)",
-                }}
-              >
-                <Github className="w-6 h-6 text-gray-700 group-hover:text-gray-800 transition-colors duration-300" />
+            <div className="flex justify-center gap-6 mb-8">
+              <a href="https://github.com/Yatharth2001" target="_blank">
+                <Github className="w-6 h-6 text-gray-700 hover:text-black transition" />
               </a>
-
-              <a
-                href="https://www.instagram.com/yatharth_1503"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group p-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(236, 72, 153, 0.1))",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255, 255, 255, 0.3)",
-                }}
-              >
-                <Instagram className="w-6 h-6 text-pink-600 group-hover:text-pink-700 transition-colors duration-300" />
+              <a href="https://www.instagram.com/yatharth_1503" target="_blank">
+                <Instagram className="w-6 h-6 text-pink-500 hover:text-pink-600 transition" />
               </a>
-
-              <a
-                href="mailto:yatharthshah00@gmail.com"
-                className="group p-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(239, 68, 68, 0.1))",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255, 255, 255, 0.3)",
-                }}
-              >
-                <Mail className="w-6 h-6 text-red-500 group-hover:text-red-600 transition-colors duration-300" />
+              <a href="mailto:yatharthshah00@gmail.com">
+                <Mail className="w-6 h-6 text-red-500 hover:text-red-600 transition" />
               </a>
-
               <a
                 href="https://yatharth-shah-portfolio.vercel.app/"
                 target="_blank"
-                rel="noopener noreferrer"
-                className="group p-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(34, 197, 94, 0.1))",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255, 255, 255, 0.3)",
-                }}
               >
-                <Globe className="w-6 h-6 text-green-600 group-hover:text-green-700 transition-colors duration-300" />
+                <Globe className="w-6 h-6 text-green-600 hover:text-green-700 transition" />
               </a>
             </div>
 
-            {/* Professional LinkedIn Button */}
+            {/* LinkedIn Button */}
             <button
               onClick={handleLinkedInClick}
-              className="group font-semibold py-3 px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform active:scale-95 border text-white"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(37, 99, 235, 0.9))",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.3)",
-                boxShadow: "0 4px 15px rgba(59, 130, 246, 0.3)",
-              }}
+              className="group font-semibold py-3 px-8 rounded-xl bg-gradient-to-r from-blue-400 to-blue-600 text-white shadow-md hover:scale-105 transition"
             >
               <span className="flex items-center justify-center gap-2">
                 <Linkedin className="w-5 h-5" />
@@ -294,9 +157,9 @@ function App() {
               </span>
             </button>
 
-            {/* Playful footer */}
-            <div className="mt-6 text-sm text-gray-600 font-medium">
-              Ready to connect? Let's build something amazing! ⚡
+            {/* Footer */}
+            <div className="mt-6 text-sm text-gray-600">
+              Ready to connect? Let’s build something joyful ⚡
             </div>
           </div>
         </div>
