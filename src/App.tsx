@@ -46,9 +46,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden text-gray-800 font-sans bg-[#f7f9fb]">
+    <div className="min-h-screen relative overflow-hidden text-gray-800 font-sans bg-red">
       {/* Ultra-light background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#ffffff] to-[#f4f7fa]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-blue to-yellow" />
 
       {/* Soft blurry blobs */}
       <div className="absolute top-10 left-10 w-56 h-56 bg-purple-100/15 rounded-full blur-[100px] animate-pulse" />
@@ -145,7 +145,7 @@ function App() {
             {/* LinkedIn Button */}
             <button
               onClick={handleLinkedInClick}
-              className="group font-semibold py-3 px-8 rounded-xl bg-gradient-to-r from-blue-400 to-blue-600 text-white shadow-md hover:scale-105 transition"
+              className="group font-semibold py-3 px-8 rounded-xl bg-gradient-to-r from-blue-400 to-blue-600 text-black shadow-md hover:scale-105 transition"
             >
               <span className="flex items-center justify-center gap-2">
                 <Linkedin className="w-5 h-5" />
