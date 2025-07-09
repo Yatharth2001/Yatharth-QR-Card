@@ -46,9 +46,9 @@ function App() {
   };
 
   return (
-    <div className="fixed inset-0 overflow-auto min-h-screen min-w-full text-gray-800 font-sans bg-red">
+    <div className="relative min-h-screen w-full text-gray-800 font-sans bg-red overflow-x-hidden">
       {/* Ultra-light background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue to-yellow" />
+      <div className="fixed inset-0 bg-gradient-to-br from-blue to-yellow -z-10" />
 
       {/* Soft blurry blobs */}
       <div className="absolute top-10 left-10 w-56 h-56 bg-purple-100/15 rounded-full blur-[100px] animate-pulse" />
@@ -59,7 +59,7 @@ function App() {
         <source src="/Papa Kehte Hain.mp3" type="audio/mpeg" />
       </audio>
 
-      <div className="relative z-10 flex items-center justify-center w-full min-h-screen min-w-full p-4">
+      <div className="relative z-10 flex items-center justify-center min-h-screen w-full p-4">
         <div className="w-full max-w-xl mx-auto">
           <div
             className="relative rounded-[2rem] p-10 text-center border"
