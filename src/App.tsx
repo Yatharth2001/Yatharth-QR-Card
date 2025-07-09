@@ -46,7 +46,7 @@ function App() {
   };
 
   return (
-    <div className="fixed inset-0 overflow-hidden min-h-screen min-w-full text-gray-800 font-sans bg-red">
+    <div className="fixed inset-0 overflow-auto min-h-screen min-w-full text-gray-800 font-sans bg-red">
       {/* Ultra-light background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue to-yellow" />
 
@@ -59,7 +59,7 @@ function App() {
         <source src="/Papa Kehte Hain.mp3" type="audio/mpeg" />
       </audio>
 
-      <div className="relative z-10 flex items-center justify-center w-full h-full min-h-screen min-w-full p-4">
+      <div className="relative z-10 flex items-center justify-center w-full min-h-screen min-w-full p-4">
         <div className="w-full max-w-xl mx-auto">
           <div
             className="relative rounded-[2rem] p-10 text-center border"
